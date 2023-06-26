@@ -1,0 +1,135 @@
+{% extends "./base.html"%}
+
+{% load static %}
+
+
+
+{% block body%}
+
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Bienvenido {{user.username}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% else %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Bienvenido {{ user.username }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
+
+    {% else %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      Bienvenido, para utilizar todas las funciones inicie sesion.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+
+
+
+
+<div id="myCarousel" class="carousel slide carousel-fade" data-bs-target="carousel" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    </ol>
+
+
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <div class="overlay-image" id="overlay-image-flores"></div>
+        <div class="container">
+          <h1>Flores</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ad fugiat, consequuntur sequi voluptas
+            ipsum perferendis laudantium officiis tempora optio nam. Beatae voluptatum assumenda facere, quibusdam
+            cupiditate dignissimos possimus! Possimus?</p>
+          <a href="#" class="btn btn-lg btn-primary">
+            Compra ya
+          </a>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="10000">
+        <div class="overlay-image" id="overlay-image-macetero"></div>
+        <div class="container">
+          <h1>Maceteros</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ad fugiat, consequuntur sequi voluptas
+            ipsum perferendis laudantium officiis tempora optio nam. Beatae voluptatum assumenda facere, quibusdam
+            cupiditate dignissimos possimus! Possimus?</p>
+          <a href="#" class="btn btn-lg btn-primary">
+            Compra ya
+          </a>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="10000">
+        <div class="overlay-image" id="overlay-image-herramienta">
+        </div>
+        <div class="container">
+          <h1>Herramientas de jardineria</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ad fugiat, consequuntur sequi voluptas
+            ipsum perferendis laudantium officiis tempora optio nam. Beatae voluptatum assumenda facere, quibusdam
+            cupiditate dignissimos possimus! Possimus?</p>
+          <a href="#" class="btn btn-lg btn-primary">
+            Compra ya
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+  
+
+  <div class="container mt-5 text-center">
+    <div class="row">
+        <div class="col col-md-12 align-self-center">
+            <h1>Productos destacados</h1>
+        </div>
+
+        {% for p in productos %}
+            <div class="col col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img  value="{{p.imagenUrl.url}}" src="{{p.imagenUrl.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <input id="nombre{{p.sku}}" type="text"  style="display: none" value="{{ p.nombre }}">
+                      <input id="precio{{p.sku}}" type="text"  style="display: none" value="{{ p.sku }}">
+                      <input id="imagen{{p.sku}}" type="text"  style="display: none" value="{{ p.imagenUrl.url }}">
+
+                      <h5 class="card-title">{{p.nombre}}</h5>
+                      <p  class="card-text">${{p.precio}}</p>
+
+                      {% if user.is_authenticated %}
+                      <a onclick="agregarProducto('{{p.sku}}'  )" id="{{p.sku}}" href="#" class="btn btn-primary btn-comprar">Agregar al carrito</a>
+                      {% else %}
+                      <a href="/tienda/login" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">Inicie sesion para comprar</a>
+                      {% endif %}
+                      
+                    </div>
+                  </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+
+  
+
+
+{% endblock %}
+
+
+
+{% block script %}
+
+<script src="{% static 'js/agregarCarrito.js' %}"></script>
+
+{% endblock %}

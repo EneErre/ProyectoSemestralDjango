@@ -1,0 +1,58 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="container text-center">
+
+    {% if error == 'contrasenia' %}
+    <div class="alert alert-danger mt-2 mb-2" role="alert">
+        La contraseña debe ser de minimo 8 de largo
+    </div>
+    {%  elif error == 'email' %}
+    <div class="alert alert-danger mt-2 mb-2" role="alert">
+        El correo ingresado ya ha sido utilizado
+    </div>
+    {%  elif error == 'usuario' %}
+    <div class="alert alert-danger mt-2 mb-2" role="alert">
+        El usuario ingresado ya ha sido utilizado
+    </div>
+    {% endif %}
+
+    <h1>Registro de usuario</h1>
+    <form action="registroUsuarioForm" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="row">
+
+            <div class="col-md-12">
+                <label for="txtNomUsuario">Nombre de usuario:</label>
+                <input name="txtNomUsuario" id="txtNomUsuario" type="text" class="form-control">
+            </div>
+
+            <div class="col-md-12">
+                <label for="txtEmail">Correo electronico:</label>
+                <input name="txtEmail" id="txtEmail" type="email" class="form-control">
+            </div>
+
+            <div class="col-md-12">
+                <label for="txtPassword">Contraseña:</label>
+                <input name="txtPassword" id="txtPassword" type="password" class="form-control">
+            </div>
+
+
+            <div class="col-md-12">
+                <label for="txtNombre">Nombre:</label>
+                <input name="txtNombre" id="txtNombre" type="text" class="form-control">
+            </div>
+
+            <div class="col-md-12">
+                <label for="txtApellido">Apellido:</label>
+                <input name="txtApellido" id="txtApellido" type="text" class="form-control">
+            </div>                
+        </div>
+        <button class="btn btn-success mt-5 w-100">Registrarse</button>
+    </form>
+</div>
+
+
+{% endblock %}

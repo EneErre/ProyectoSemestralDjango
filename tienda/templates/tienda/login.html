@@ -1,0 +1,50 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block body %}
+
+{% if mensaje == 'ini_sesion_incorrecta' %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  Sesion no iniciada, datos invalidos
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+
+<div class="container mt-2">
+    <div class="row text-center">
+        <div class="col col-md-12">
+            <h1>Iniciar sesion</h1>
+        </div>
+        <form action="loginForm" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="col col-md-12">
+            <div class="form-floating mb-3">
+                <input name="txtUsername" type="text" class="form-control" id="txtUsername" placeholder="usuario123">
+                <label for="txtUsername">Usuario:</label>
+            </div>
+        </div>
+            
+        <div class="col col-md-12">
+            <div class="form-floating mb-3">
+                <input name="txtPassword" type="password" class="form-control" id="txtPassword" placeholder="Contraseña123">
+                <label for="txtPassword">Contraseña:</label>
+            </div>
+        </div>
+
+        <div class="col col-md-12 ">
+            <button class="btn btn-primary w-100"> Iniciar sesion</button>
+        </div>
+
+        </form>
+
+
+        <div class="col col-md-12 mt-3">
+            <a href="/tienda/registroUsuario" class="btn btn-success w-100" tabindex="-1" role="button" aria-disabled="true">Registrarse</a>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+.imgCarrito{
+    height: 150px;
+    width: 150px;
+}
+
+.rowProducto{
+    border-bottom: solid black;
+}
+
+#nombreProducto{
+    font-size: 25px;
+    padding-top: 10%;
+}
+#descripcionProducto{
+    font-size: 25px;
+    padding-top: 10%;
+}
+#cantidadProductos{
+    font-size: 30px;
+}
+
+p{
+    font-size: 30px;
+}
